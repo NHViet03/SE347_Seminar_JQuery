@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link tới file CSS -->
+</head>
+<body>
+    <div class="container">
+        <button id="showProducts">MENU</button>
+    </div>
+    <ul id="productList" style="display:none;">
+        
+            <li>
+                <img src="https://th.bing.com/th/id/OIP.1qsdx0q3aZReJ27X3M0UMQHaEo?rs=1&pid=ImgDetMain" alt="Coffee">
+                <div class="product-info">
+                    <span class="name">Cappuccino</span>
+                    <div class="price">$4.00</div>
+                </div>
+            </li>
+            <li>
+                <img src="https://www.stefanofaita.com/wp-content/uploads/2023/07/stefano-faita_recette-affogato.jpg" alt="Affogato">
+                <div class="product-info">
+                    <span class="name">Affogato</span>
+                    <div class="price">$4.50</div>
+                </div>
+            </li>
+            <li>
+                <img src="https://phlearn.com/wp-content/uploads/2016/05/latte-art-after-1200px.jpg?w=1200&quality=99&strip=all" alt="Latte">
+                <div class="product-info">
+                    <span class="name">Latte</span>
+                    <div class="price">$4.00</div>
+                </div>
+            </li>
+            <li>
+                <img src="https://th.bing.com/th/id/OIP.yhbzh-B6gwW2j8rW2kRQKgHaFj?rs=1&pid=ImgDetMain" alt="Vietnamese Egg Coffee">
+                <div class="product-info">
+                    <span class="name">Vietnamese Egg Coffee</span>
+                    <div class="price">$5.00</div>
+                </div>
+            </li>
+      
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var button = document.getElementById('showProducts');
+            var productList = document.getElementById('productList');
+
+            button.addEventListener('click', function() {
+                if (productList.style.display === 'none') {
+                    productList.style.display = 'block'; // Hiển thị danh sách
+                } else {
+                    productList.style.display = 'none'; // Ẩn danh sách
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link tới file CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Thêm jQuery -->
+</head>
+<body>
+    <div class="container">
+        <button id="showProducts">MENU</button>
+    </div>
+    <ul id="productList" style="display:none;"></ul> <!-- Danh sách sản phẩm sẽ được tải qua AJAX -->
+
+    <script>
+        $(document).ready(function() {
+            $('#showProducts').click(function() {
+                // Kiểm tra xem danh sách đã được tải chưa
+                if ($('#productList').is(':empty')) {
+                    $.ajax({
+                        url: 'menu.json', // Đường dẫn tới tệp JSON chứa danh sách sản phẩm
+                        dataType: 'json',
+                        success: function(data) {
+                            // Duyệt qua từng sản phẩm trong dữ liệu
+                            $.each(data.menu, function(index, product) {
+                                $('#productList').append(
+                                    `<li>
+                                        <img src="${product.image}" alt="${product.name}">
+                                        <div class="product-info">
+                                            <span class="name">${product.name}</span>
+                                            <div class="price">${product.price}</div>
+                                        </div>
+                                    </li>`
+                                );
+                            });
+                            $('#productList').show(); // Hiển thị danh sách sản phẩm
+                        },
+                        error: function() {
+                            alert('Có lỗi xảy ra khi tải danh sách sản phẩm.');
+                        }
+                    });
+                } else {
+                    $('#productList').toggle(); // Chuyển đổi trạng thái hiển thị danh sách
+                }
+            });
+        });
+    </script>
+</body>
+</html>
