@@ -8,41 +8,66 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Thêm jQuery -->
 </head>
 <body>
+    
     <div class="container">
         <button id="showProducts">MENU</button>
+        <button id="AddButton">NOTE</button> <!-- Nút để hiển thị thông tin trong note.txt -->
     </div>
+
+    <!-- Form nhập thông tin sản phẩm mới -->
+    <div id="alert" style="display:none;">
+        <div id="noteContent"></div> <!-- Div để chứa nội dung từ note.txt -->
+        <button id="confirmButton">OK</button> <!-- Nút xác nhận -->
+    </div>
+
     <ul id="productList" style="display:none;"></ul> <!-- Danh sách sản phẩm sẽ được tải qua AJAX -->
 
     <script>
+
         $(document).ready(function() {
             $('#showProducts').click(function() {
                 // Kiểm tra xem danh sách đã được tải chưa
                 if ($('#productList').is(':empty')) {
-                    $.ajax({
-                        url: 'menu.json', // Đường dẫn tới tệp JSON chứa danh sách sản phẩm
-                        dataType: 'json',
-                        success: function(data) {
-                            // Duyệt qua từng sản phẩm trong dữ liệu
-                            $.each(data.menu, function(index, product) {
-                                $('#productList').append(
-                                    `<li>
-                                        <img src="${product.image}" alt="${product.name}">
-                                        <div class="product-info">
-                                            <span class="name">${product.name}</span>
-                                            <div class="price">${product.price}</div>
-                                        </div>
-                                    </li>`
-                                );
-                            });
-                            $('#productList').show(); // Hiển thị danh sách sản phẩm
-                        },
-                        error: function() {
-                            alert('Có lỗi xảy ra khi tải danh sách sản phẩm.');
-                        }
+                    // Sử dụng phương thức get() để tải dữ liệu từ menu.json
+                    $.get('menu.json', function(data) {
+                        // Duyệt qua từng sản phẩm trong dữ liệu
+                        products = data.menu; // Lưu dữ liệu vào biến products
+                        $.each(products, function(index, product) {
+                            $('#productList').append(
+                                `<li>
+                                    <img src="${product.image}" alt="${product.name}">
+                                    <div class="product-info">
+                                        <span class="name">${product.name}</span>
+                                        <div class="price">${product.price}</div>
+                                    </div>
+                                </li>`
+                            );
+                        });
+                        $('#productList').show(); // Hiển thị danh sách sản phẩm
+                    }, 'json')
+                    .fail(function() {
+                        alert('Có lỗi xảy ra khi tải danh sách sản phẩm.');
                     });
                 } else {
                     $('#productList').toggle(); // Chuyển đổi trạng thái hiển thị danh sách
                 }
+            });
+
+            // Hiển thị nội dung từ note.txt
+            $('#AddButton').click(function() {
+                $('#noteContent').load('note.txt', function(response, status, xhr) {
+                    if (status == "success") {
+                        $(this).html('<p>' + $(this).html().replace(/\n/g, '</p><p>') + '</p>'); // Đưa nội dung vào thẻ <p>
+                        $('#alert').show(); // Hiển thị khung alert
+                    } else {
+                        alert("Có lỗi xảy ra khi tải nội dung từ note.txt: " + xhr.status + " " + xhr.statusText);
+                    }
+                });
+            });
+
+            // Ẩn alert khi nhấn nút OK
+            $('#confirmButton').click(function() {
+                $('#alert').hide(); // Ẩn alert khi nhấn nút OK
             });
         });
     </script>

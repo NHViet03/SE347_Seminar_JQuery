@@ -31,22 +31,24 @@ body::after {
 
 .container {
     display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    height: 20vh; /* Chiều cao 100% màn hình */
+    justify-content: space-around; /* Căn đều khoảng cách giữa hai nút */
+    align-items: center;
+    height: 20vh;
     background-color: rgba(255, 255, 255, 0.8); /* Màu nền trắng với độ mờ */
-    border-radius: 10px; /* Bo góc cho khung chứa */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng cho khung chứa */
+    padding: 20px; /* Thêm khoảng cách bên trong container */
 }
 
 button {
-    padding: 20px 50px; /* Khoảng cách trong nút */
-    font-size: 1.2em; /* Kích thước chữ cho nút */
-    color: #fff; /* Màu chữ */
+    padding: 15px 40px; /* Điều chỉnh lại khoảng cách trong nút cho cân đối */
+    font-size: 1.2em;
+    color: #fff;
     background-color: #622a1d; /* Màu nền cho nút */
-    border: none; /* Xóa đường viền */
-    border-radius: 5px; /* Bo góc cho nút */
-    cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột qua nút */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển khi hover */
 }
 
 button:hover {
@@ -79,4 +81,74 @@ button:hover {
 }
 .name{
     font-size: 1.75em
+}
+
+#productForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    position: fixed; /* Đặt khung ở vị trí cố định trên màn hình */
+    top: 0; /* Căn từ trên cùng */
+    left: 0; /* Căn từ bên trái */
+    width: 100vw; /* Chiều rộng 100% của viewport */
+    height: 100vh; /* Chiều cao 100% của viewport */
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng với độ mờ */
+    z-index: 999; /* Đảm bảo form nằm trên tất cả các phần tử khác */
+}
+
+
+#productForm input {
+    margin-bottom: 15px; /* Khoảng cách giữa các khung nhập */
+    padding: 15px; /* Khoảng cách trong khung nhập */
+    font-size: 1.3em; /* Kích thước chữ to hơn */
+    width: 80%; /* Độ rộng của khung nhập */
+    max-width: 500px; /* Giới hạn độ rộng tối đa */
+    border: 1px solid #ccc; /* Viền cho khung nhập */
+    border-radius: 5px; /* Bo góc khung nhập */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Thêm bóng cho khung nhập */
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+#productForm input:focus {
+    border-color: #622a1d; /* Màu viền khi focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ khi focus */
+}
+
+#confirmButton {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #622a1d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#confirmButton:hover {
+    background-color: #e2cb9b;
+    transform: scale(1.05);
+}
+
+#alert {
+    display: none;
+    position: fixed; /* Đặt vị trí cố định */
+    top: 50%; /* Đặt vị trí cách trên 50% */
+    left: 50%; /* Đặt vị trí cách trái 50% */
+    transform: translate(-50%, -50%); /* Đưa vào giữa màn hình */
+    background-color: white; /* Màu nền trắng */
+    border: 1px solid #ccc; /* Đường viền xám */
+    border-radius: 10px; /* Bo tròn góc */
+    padding: 20px; /* Đệm bên trong */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Đổ bóng */
+    z-index: 1000; /* Đảm bảo hiển thị trên các phần tử khác */
+    max-width: 600px; /* Đặt chiều rộng tối đa */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+/* Đảm bảo nội dung text trong note xuống dòng */
+#alert p {
+    margin: 10px 0; /* Đặt khoảng cách trên và dưới */
+    white-space: pre-wrap; /* Giữ định dạng xuống dòng */
 }
