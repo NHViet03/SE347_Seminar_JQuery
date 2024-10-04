@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery DOM Manipulation</title>
+  <!-- Link to jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Khi người dùng click vào phần tử li có class là "child", tìm phần tử cha và thay đổi màu nền
+      $('li.child').click(function() {
+        $(this).parent().css('background-color', '#f0f0f0');
+      });
+
+      // Khi nhấn vào button "Highlight Sibling", tìm phần tử kế tiếp (next sibling) của li.child và đổi màu text
+      $('#highlightSiblingButton').click(function() {
+        $('li.child').next().css('color', 'blue');
+      });
+
+      // Khi nhấn vào button "Highlight Descendants", tìm tất cả phần tử con cháu của ul và thêm viền
+      $('#highlightDescendantsButton').click(function() {
+        $('ul#mainList').find('*').css('border', '1px solid red');
+      });
+    });
+  </script>
+</head>
+<body>
+    <h1>Ví dụ jQuery Selector kết hợp với Traversing</h1>
+  
+    <ul id="mainList">
+      <li>Phần tử 1</li>
+      <li class="child">Phần tử 2 (child)</li>
+      <li>Phần tử 3</li>
+      <li>Phần tử 4</li>
+    </ul>
+  
+    <button id="highlightSiblingButton">Highlight Sibling</button>
+    <button id="highlightDescendantsButton">Highlight Descendants</button>
+  </body>
+</html>
